@@ -4,13 +4,14 @@ import { Container } from './styles';
 
 interface FormGroupProps {
   children: ReactNode;
+  error: string | null
 }
 
-const FormGroup: React.FC<FormGroupProps> = ({children}) => {
+const FormGroup: React.FC<FormGroupProps> = ({ children, error }) => {
   return (
     <Container>
       {children}
-      <small className='error'>Error</small>
+      {error && <small className='error'>{error}</small>}
     </Container>
   );
 }

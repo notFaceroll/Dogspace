@@ -1,56 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TOKEN_POST, USER_GET } from '../../../api';
 import Button from '../../../Components/Button';
 import { StyledButton } from '../../../Components/Button/styles';
 import FormGroup from '../../../Components/FormGroup';
 import { StyledInput } from '../../../Components/Input/styles';
 
+import useForm from '../../../hooks/useForm';
+
 import { Container } from './styles';
 
 const LoginForm: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const username = useForm();
+  const password = useForm();
 
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    if (token) {
+      getUser(token);
+    }
+  }, [])
+
+  async function getUser(token: string) {
+    const { url, options } = USER_GET(token);
+    const response = await fetch(url, options);
+    const data = await response.json();
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    fetch('https://dogsapi.origamid.dev/json/jwt-auth/v1/token',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      }
-    ).then((response) => {
-      console.log({ response });
-      return response.json();
-    }).then((json) => {
-      console.log(json);
-    });
+
+    if (username.validate() && password.validate()) {
+      const { url, options } = TOKEN_POST({
+        username: username.value,
+        password: password.value
+      })
+
+      const response = await fetch(url, options);
+      const data = await response.json();
+      window.localStorage.setItem('token', data.token);
+
+      console.log({ data });
+      return data;
+
+    }
   }
 
   return (
     <Container>
       <h1>Login</h1>
       <form action='' onSubmit={handleSubmit}>
-        <FormGroup>
+
+        <FormGroup error={username.error}>
           <label htmlFor='username'>Username</label>
           <StyledInput
             id='username'
             type='text'
-            value={username}
-            onChange={({ target }) => setUsername(target.value)}
+            value={username.value}
+            onChange={username.onChange}
+            onBlur={username.onBlur}
           />
         </FormGroup>
 
-        <FormGroup>
+        <FormGroup error={password.error}>
           <label htmlFor='password'>Password</label>
           <StyledInput
             id='password'
             type='password'
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
+            value={password.value}
+            onChange={password.onChange}
+            onBlur={password.onBlur}
           />
         </FormGroup>
         <Button type='submit'>Entrar</Button>
