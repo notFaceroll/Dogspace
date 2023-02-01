@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TOKEN_POST, USER_GET } from '../../../api';
 import Button from '../../../Components/Button';
 import { StyledButton } from '../../../Components/Button/styles';
 import FormGroup from '../../../Components/FormGroup';
 import { StyledInput } from '../../../Components/Input/styles';
+import { UserContext } from '../../../context/UserContext';
 
 import useForm from '../../../hooks/useForm';
 
@@ -14,37 +15,14 @@ const LoginForm: React.FC = () => {
   const username = useForm();
   const password = useForm();
 
-  useEffect(() => {
-    const token = window.localStorage.getItem('token');
-
-    if (token) {
-      getUser(token);
-    }
-  }, [])
-
-  async function getUser(token: string) {
-    const { url, options } = USER_GET(token);
-    const response = await fetch(url, options);
-    const data = await response.json();
-  }
+  const { userLogin } = useContext(UserContext);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (username.validate() && password.validate()) {
-      const { url, options } = TOKEN_POST({
-        username: username.value,
-        password: password.value
-      })
-
-      const response = await fetch(url, options);
-      const data = await response.json();
-      window.localStorage.setItem('token', data.token);
-
-      console.log({ data });
-      return data;
-
-    }
+        userLogin(username.value, password.value);
+      }
   }
 
   return (

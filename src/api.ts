@@ -14,12 +14,13 @@ export function TOKEN_POST(body: any) {
 }
 
 export function USER_GET(token: string) {
+  console.log({ token });
   return {
     url: API_URL + '/api/user',
     options: {
-      method: 'POST',
+      method: 'GET',
       headers: {
-        Authorization: 'Bearer' + token
+        'Authorization': 'Bearer ' + token
       },
     },
   };

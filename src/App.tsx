@@ -8,24 +8,27 @@ import Login from "./pages/Login"
 import GlobalStyle from './styles/global';
 import { ThemeProvider } from "styled-components"
 import { myTheme } from "./styles/themes/default"
+import UserProvider from "./context/UserContext"
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={myTheme}>
-        <GlobalStyle />
+    <UserProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={myTheme}>
+          <GlobalStyle />
 
-        <Header />
-        <h1>Dogs</h1>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login/*" element={<Login />} />
-        </Routes>
-        <Footer />
+          <Header />
+          <h1>Dogs</h1>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login/*" element={<Login />} />
+          </Routes>
+          <Footer />
 
-      </ThemeProvider>
-    </BrowserRouter>
+        </ThemeProvider>
+      </BrowserRouter>
+    </UserProvider>
   )
 }
 
