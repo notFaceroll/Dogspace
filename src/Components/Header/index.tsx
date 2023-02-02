@@ -7,7 +7,7 @@ import { UserContext } from '../../context/UserContext';
 
 const Header: React.FC = () => {
 
-  const { data } = useContext(UserContext);
+  const { data, userLogout } = useContext(UserContext);
 
   return (
     <Container>
@@ -16,10 +16,16 @@ const Header: React.FC = () => {
           <img src={dogs} alt="Dog" />
         </Link>
         {data ? (
-          <Link to='/account' className='login'>{data.nome}</Link>
+          <>
+            <Link to='/account' className='login'>
+              {data.nome}
+            </Link>
+            <button onClick={userLogout}>Logout</button>
+          </>
         ) : (
           <Link to='/login' className='login'>Login / Criar</Link>
         )}
+
       </nav>
     </Container>
   );
