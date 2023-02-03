@@ -7,7 +7,7 @@ import LoginPasswordLost from './LoginPasswordLost';
 import LoginPasswordReset from './LoginPasswordReset';
 import { UserContext } from '../../context/UserContext';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 const Login: React.FC = () => {
   const { isUserLoggedIn } = useContext(UserContext);
@@ -19,14 +19,16 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div>
-      <Routes>
-        <Route path='/' element={<LoginForm />} />
-        <Route path='create' element={<LoginCreate />} />
-        <Route path='lost' element={<LoginPasswordLost />} />
-        <Route path='reset' element={<LoginPasswordReset />} />
-      </Routes>
-    </div>);
+    <Container>
+      <div className='forms'>
+        <Routes>
+          <Route path='/' element={<LoginForm />} />
+          <Route path='create' element={<LoginCreate />} />
+          <Route path='lost' element={<LoginPasswordLost />} />
+          <Route path='reset' element={<LoginPasswordReset />} />
+        </Routes>
+      </div>
+    </Container>);
 }
 
 export default Login;

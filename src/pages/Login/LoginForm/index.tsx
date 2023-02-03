@@ -6,7 +6,7 @@ import { StyledInput } from '../../../Components/Input/styles';
 import { UserContext } from '../../../context/UserContext';
 import useForm from '../../../hooks/useForm';
 
-import { Container } from './styles';
+import { Container, RecoverPasswordLink, SignUpContainer, StyledLink } from './styles';
 
 const LoginForm: React.FC = () => {
   const username = useForm();
@@ -18,8 +18,8 @@ const LoginForm: React.FC = () => {
     event.preventDefault();
 
     if (username.validate() && password.validate()) {
-        userLogin(username.value, password.value);
-      }
+      userLogin(username.value, password.value);
+    }
   }
 
   return (
@@ -27,8 +27,7 @@ const LoginForm: React.FC = () => {
       <h1>Login</h1>
       <form action='' onSubmit={handleSubmit}>
 
-        <FormGroup error={username.error}>
-          <label htmlFor='username'>Username</label>
+        <FormGroup error={username.error} label="username">
           <StyledInput
             id='username'
             type='text'
@@ -38,8 +37,7 @@ const LoginForm: React.FC = () => {
           />
         </FormGroup>
 
-        <FormGroup error={password.error}>
-          <label htmlFor='password'>Password</label>
+        <FormGroup error={password.error} label="password">
           <StyledInput
             id='password'
             type='password'
@@ -51,7 +49,12 @@ const LoginForm: React.FC = () => {
         <Button disabled={isLoading} type='submit'>Entrar</Button>
         {error && <p>{error}</p>}
       </form>
-      <Link to="/login/create">Criar</Link>
+      <RecoverPasswordLink to="/login/reset">Perdeu a senha?</RecoverPasswordLink>
+      <SignUpContainer>
+        <h2>Cadastre-se!</h2>
+        <p>Ainda não possui uma conta? Cadastre-se no site.</p>
+        <StyledLink to="/login/create">Cadastro</StyledLink>
+      </SignUpContainer>
     </Container>
   );
 }

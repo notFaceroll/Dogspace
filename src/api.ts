@@ -26,7 +26,6 @@ export function TOKEN_VALIDATE_POST(token: string) {
 }
 
 export function USER_GET(token: string) {
-  console.log({ token });
   return {
     url: API_URL + '/api/user',
     options: {
@@ -34,6 +33,19 @@ export function USER_GET(token: string) {
       headers: {
         'Authorization': 'Bearer ' + token
       },
+    },
+  };
+}
+
+export function USER_POST(body: any) {
+  return {
+    url: API_URL + '/api/user',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
     },
   };
 }
