@@ -4,6 +4,7 @@ import Button from '../../../Components/Button';
 import FormGroup from '../../../Components/FormGroup';
 import { StyledInput } from '../../../Components/Input/styles';
 import { UserContext } from '../../../context/UserContext';
+import useFetch from '../../../hooks/useFetch';
 import useForm from '../../../hooks/useForm';
 import { FormTitle } from '../LoginForm/styles';
 
@@ -13,7 +14,9 @@ const LoginCreate: React.FC = () => {
   const username = useForm();
   const password = useForm();
   const email = useForm('email');
+
   const { userLogin } = useContext(UserContext);
+  const { isLoading, error, makeRequest } = useFetch();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,9 +27,9 @@ const LoginCreate: React.FC = () => {
       password: password.value,
     });
 
-    const response = await fetch(url, options);
+    const { response } = await makeRequest(url, options);
 
-    if (!response.ok) {
+    if (response?.ok) {
       userLogin(username.value, password.value)
     }
   }
@@ -62,7 +65,12 @@ const LoginCreate: React.FC = () => {
             value={password.value}
           />
         </FormGroup>
-        <Button type='submit'>Cadastrar</Button>
+        <Button
+          disabled={isLoading}
+          type='submit'>
+          {isLoading ? 'Cadastrando...' : 'Cadastrar'}
+        </Button>
+        {error && <p>{error}</p>}
       </form>
 
     </Container>

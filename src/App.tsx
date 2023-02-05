@@ -9,6 +9,7 @@ import GlobalStyle from './styles/global';
 import { ThemeProvider } from "styled-components"
 import { myTheme } from "./styles/themes/default"
 import UserProvider from "./context/UserContext"
+import ProtectedRoute from "./Components/utils/ProtectedRoute"
 import Account from "./pages/Account"
 
 function App() {
@@ -23,7 +24,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login/*" element={<Login />} />
-            <Route path="/account" element={<Account />} />
+            <Route path="/account/*"
+              element={
+                <ProtectedRoute>
+                  <Account />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Footer />
 

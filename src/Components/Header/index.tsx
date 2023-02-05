@@ -20,7 +20,6 @@ const Header: React.FC = () => {
             <Link to='/account' className='login'>
               {data.nome}
             </Link>
-            <button onClick={userLogout}>Logout</button>
           </>
         ) : (
           <Link to='/login' className='login'>Login / Criar</Link>

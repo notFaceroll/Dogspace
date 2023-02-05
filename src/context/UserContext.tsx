@@ -43,6 +43,11 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   useEffect(() => {
     async function autoLogin() {
       const token = window.localStorage.getItem('token');
+
+      if (token && isUserLoggedIn) return;
+
+      console.log('autologin')
+
       if (token) {
         try {
           setError(null);
@@ -58,6 +63,8 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         } finally {
           setIsLoading(false);
         }
+      } else {
+        setIsUserLoggedIn(false);
       }
     }
     autoLogin();

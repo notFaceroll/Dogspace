@@ -50,6 +50,10 @@ export const FormTitle = styled.h1`
   font-weight: 700;
   z-index: 1;
 
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
   &::after {
     content: '';
     display: block;
