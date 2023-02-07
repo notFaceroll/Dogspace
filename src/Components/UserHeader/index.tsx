@@ -10,13 +10,17 @@ import feed from '../../assets/feed.svg'
 import leave from '../../assets/sair.svg'
 
 import { Header, NavContainer } from './styles';
+import useMedia from '../../hooks/useMedia';
 
 const pages = ['account', 'stats', 'post'];
 
 const UserHeader: React.FC = () => {
-  const [mobile, setMobile] = useState(false);
   const [currentTitle, setCurrentTitle] = useState<string | undefined>('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const { userLogout } = useContext(UserContext);
+
+  const mobile = useMedia('(max-width: 40rem)');
   const location = useLocation();
 
   useEffect(() => {
@@ -24,13 +28,22 @@ const UserHeader: React.FC = () => {
     const foundPage = pages.find(element => element === pathTitle);
     if (foundPage) {
       setCurrentTitle(pathTitle);
+      setIsMobileMenuOpen(false);
     }
   }, [location])
 
   return (
-    <Header>
+    <Header isMobile={mobile} isOpen={isMobileMenuOpen}>
       <FormTitle>{currentTitle}</FormTitle>
-      <NavContainer>
+      {mobile && (
+        <button
+          className='toggle-menu-btn'
+          aria-label='Menu'
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        </button>
+      )
+      }
+      <NavContainer isMobile={mobile} isOpen={isMobileMenuOpen}>
         <ul>
           <li>
             <NavLink to='/account' end>
