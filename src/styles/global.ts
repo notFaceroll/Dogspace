@@ -1,4 +1,11 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
+
+const slideRight = keyframes`
+  to {
+    opacity: 1;
+    transform: initial;
+  }
+`
 
 export default createGlobalStyle`
   * {
@@ -36,5 +43,11 @@ export default createGlobalStyle`
   .container {
     max-width: 90rem;
     margin-inline: auto;
+  }
+
+  .slideRight {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: ${slideRight} .3s forwards;
   }
 `

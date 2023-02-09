@@ -1,9 +1,14 @@
 import React from 'react';
+import Feed from '../../Components/Feed';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 const Home: React.FC = () => {
-  return <div>Home Page</div>;
+  return (
+    <Container>
+      <Feed />
+    </Container>
+  );
 }
 
 export default Home;
