@@ -72,3 +72,13 @@ export function PHOTOS_GET({ page, total, user }: { page: number, total: number,
     },
   };
 }
+
+export function PHOTO_GET(photoId: number) {
+  return {
+    url: API_URL + `/api/photo/${photoId}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store'
+    },
+  };
+}

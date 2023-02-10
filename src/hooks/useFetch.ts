@@ -1,4 +1,11 @@
 import React, { useCallback, useState } from 'react';
+import { IPhoto } from '../Components/Feed/FeedGrid';
+
+
+export interface IData {
+  photo: IPhoto;
+  comments: string[];
+}
 
 const useFetch = () => {
   const [data, setData] = useState<any>(null);

@@ -5,7 +5,7 @@ import Loading from '../../utils/Loading';
 
 import { PhotoList, PhotoItem } from './styles';
 
-interface IPhoto {
+export interface IPhoto {
   acessos: string;
   author: string;
   date: string;
@@ -17,7 +17,8 @@ interface IPhoto {
   total_comments: string;
 }
 
-const FeedGrid: React.FC = () => {
+
+const FeedGrid: React.FC<{ setModalPhoto: React.Dispatch<React.SetStateAction<IPhoto | null>> }> = ({ setModalPhoto }) => {
   const { data, error, isLoading, makeRequest } = useFetch();
 
   useEffect(() => {
@@ -27,6 +28,10 @@ const FeedGrid: React.FC = () => {
       console.log(json);
     })();
   }, [])
+
+  function handleOpenPhotoModal(photo: IPhoto) {
+    setModalPhoto(photo)
+  }
 
   if (error) {
     return <p>{error}</p>
@@ -38,7 +43,10 @@ const FeedGrid: React.FC = () => {
   return (
     <PhotoList className='slideRight'>
       {data?.map((photo: IPhoto) => (
-        <PhotoItem key={photo.id}>
+        <PhotoItem
+          key={photo.id}
+          onClick={() => handleOpenPhotoModal(photo)}
+        >
           <img src={photo.src} alt={photo.title} />
           <span>{photo.acessos}</span>
         </PhotoItem>

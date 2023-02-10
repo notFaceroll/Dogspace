@@ -3,6 +3,7 @@ import { USER_POST } from '../../../api';
 import Button from '../../../Components/Button';
 import FormGroup from '../../../Components/FormGroup';
 import { StyledInput } from '../../../Components/Input/styles';
+import { Title } from '../../../Components/Title';
 import { UserContext } from '../../../context/UserContext';
 import useFetch from '../../../hooks/useFetch';
 import useForm from '../../../hooks/useForm';
@@ -36,7 +37,7 @@ const LoginCreate: React.FC = () => {
 
   return (
     <Container>
-      <FormTitle>Cadastre-se</FormTitle>
+      <Title>Cadastre-se</Title>
 
       <form action="" onSubmit={handleSubmit}>
         <FormGroup label='username' error={username.error}>
