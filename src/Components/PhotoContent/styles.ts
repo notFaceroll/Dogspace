@@ -96,3 +96,22 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const PhotoDeleteButton = styled.button`
+  background-color: #ddd;
+  padding: .3rem .6rem;
+  line-height: 1;
+  border: 1px solid transparent;
+  font-size: .875rem;
+  font-family: ${({ theme }) => theme.fonts.primary};
+  cursor: pointer;
+  border-radius: .4rem;
+  transition: .1s;
+
+  &:is(:hover, :focus) {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px #eee;
+    border-color: #333;
+  }
+`

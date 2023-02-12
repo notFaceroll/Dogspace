@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { PHOTOS_GET } from '../../../api';
 import useFetch from '../../../hooks/useFetch';
 import Loading from '../../utils/Loading';
+import Image from '../../utils/Image';
 
 import { PhotoList, PhotoItem } from './styles';
 
@@ -47,7 +48,8 @@ const FeedGrid: React.FC<{ setModalPhoto: React.Dispatch<React.SetStateAction<IP
           key={photo.id}
           onClick={() => handleOpenPhotoModal(photo)}
         >
-          <img src={photo.src} alt={photo.title} />
+          <Image src={photo.src} alt={photo.title}/>
+          {/* <img src={photo.src} alt={photo.title} /> */}
           <span>{photo.acessos}</span>
         </PhotoItem>
       ))}

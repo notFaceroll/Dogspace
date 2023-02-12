@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     <Container>
       <div className='forms'>
         <Routes>
-          <Route index element={<LoginForm />} />
+          <Route path='/' element={<LoginForm />} />
           <Route path='create' element={<LoginCreate />} />
           <Route path='lost' element={<LoginPasswordLost />} />
           <Route path='reset' element={<LoginPasswordReset />} />

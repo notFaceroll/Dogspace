@@ -13,7 +13,7 @@ const useFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const makeRequest = useCallback(async (url: string, options: any) => {
-    let response;
+    let response: Response;
     let json;
 
     try {
@@ -30,6 +30,7 @@ const useFetch = () => {
     } finally {
       setData(json);
       setIsLoading(false);
+      // @ts-ignore
       return { response, json }
     }
   }, []);

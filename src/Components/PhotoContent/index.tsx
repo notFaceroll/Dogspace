@@ -1,25 +1,57 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { IData } from '../../hooks/useFetch';
+import { PHOTO_DELETE } from '../../api';
+import { UserContext } from '../../context/UserContext';
+import useFetch from '../../hooks/useFetch';
 import { IPhoto } from '../Feed/FeedGrid';
 import { Title } from '../Title';
+import Image from '../utils/Image';
 import PhotoComments from './PhotoComments';
 
-import { Container } from './styles';
+import { Container, PhotoDeleteButton } from './styles';
 
 const PhotoContent: React.FC<any> = ({ data }) => {
+  const { isLoading, makeRequest } = useFetch();
+  const user = useContext(UserContext);
   const { comments } = data;
   const photo: IPhoto = data.photo;
+
+  async function handlePhotoDelete() {
+    const confirm = window.confirm("Tem certeza que deseja deletar essa foto?");
+    if (confirm) {
+      const token = window.localStorage.getItem('token');
+
+      if (token) {
+        const { url, options } = PHOTO_DELETE(photo.id, token)
+        const { response } = await makeRequest(url, options);
+
+        if (response.ok) {
+          window.location.reload();
+        }
+      }
+    }
+  }
+
 
   return (
     <Container>
       <div className='img'>
-        <img src={photo.src} alt={photo.title} />
+        <Image src={photo.src} alt={photo.title}/>
+        {/* <img src={photo.src} alt={photo.title} /> */}
       </div>
       <div className='details'>
         <div>
           <p className='author'>
-            <Link to={`/profile/${photo.author}`}>@{photo.author}</Link>
+            {user.data && user.data.username === photo.author ? (
+              <PhotoDeleteButton
+                disabled={isLoading}
+                onClick={handlePhotoDelete}
+              >
+                {isLoading ? "Deletando" : "Deletar"}
+              </PhotoDeleteButton>
+            ) : (
+              <Link to={`/profile/${photo.author}`}>@{photo.author}</Link>
+            )}
             <span className='views'>{photo.acessos}</span>
           </p>
           <Title>
@@ -31,8 +63,7 @@ const PhotoContent: React.FC<any> = ({ data }) => {
           </ul>
         </div>
       </div>
-      {/* @ts-ignore */}
-      <PhotoComments id={photo.id} comments={comments}/>
+      <PhotoComments id={photo.id} comments={comments} />
     </Container>
   );
 }
