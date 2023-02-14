@@ -11,6 +11,7 @@ import { myTheme } from "./styles/themes/default"
 import UserProvider from "./context/UserContext"
 import ProtectedRoute from "./Components/utils/ProtectedRoute"
 import Account from "./pages/Account"
+import Photo from "./pages/Photo"
 
 function App() {
 
@@ -22,9 +23,10 @@ function App() {
 
           <Header />
           <Routes>
-            <Route index element={<Home />} />
-            <Route path="/login/*" element={<Login />} />
-            <Route path="/account/*"
+            <Route path="/" element={<Home />} />
+            <Route path="login/*" element={<Login />} />
+            <Route path="photo/:id" element={<Photo />} />
+            <Route path="account/*"
               element={
                 <ProtectedRoute>
                   <Account />

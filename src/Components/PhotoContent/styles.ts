@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import viewIcon from '../../assets/visualizacao-black.svg';
 
 const scaleUp = keyframes`
@@ -8,7 +8,11 @@ const scaleUp = keyframes`
   }
 `
 
-export const Container = styled.div`
+interface Props {
+  single: boolean;
+}
+
+export const Container = styled.div<Props>`
   margin: auto;
   height: 36rem;
   border-radius: .2rem;
@@ -17,6 +21,11 @@ export const Container = styled.div`
   grid-template-columns: 36rem 20rem;
   grid-template-rows: auto 1fr auto;
   overflow: hidden;
+
+  ${({ single }) => single && css`
+    grid-template-columns: 1fr;
+    height: auto;
+  `};
 
   opacity: 0;
   scale: .8;
@@ -49,15 +58,23 @@ export const Container = styled.div`
   }
 
   .details {
-    padding: 2rem 2rem 0 2rem
+    padding: 2rem 2rem 0 2rem;
+    ${({ single }) => single && css` padding: 1rem 0px 0px; `};
   }
 
   .img {
     grid-row: 1 / 4;
+
+    ${({ single }) => single && css`
+      grid-row: 1;
+      border-radius: .2rem;
+      overflow: hidden;
+    `};
   }
 
   .comments {
     padding: 0 2rem;
+    ${({ single }) => single && css` padding: 0; `};
   }
 
   .attributes {

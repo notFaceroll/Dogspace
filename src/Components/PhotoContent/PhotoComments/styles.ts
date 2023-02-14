@@ -1,10 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const CommentsForm = styled.form`
+export const CommentsForm = styled.form<Props>`
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: stretch;
   margin: 1rem;
+
+  ${({ single }) => single && css` margin: 1rem 0; `};
 
   button {
     border: none;
@@ -44,10 +46,15 @@ export const CommentsForm = styled.form`
   }
 `;
 
-export const CommentsList = styled.ul`
+interface Props {
+  single: boolean;
+}
+
+export const CommentsList = styled.ul<Props>`
   overflow-y: auto;
   word-break: break-word;
   padding: 2rem;
+  ${({ single }) => single && css` padding: 2rem 0; `};
 
   li {
     margin-bottom: .5rem;

@@ -73,7 +73,7 @@ export function PHOTOS_GET({ page, total, user }: { page: number, total: number,
   };
 }
 
-export function PHOTO_GET(photoId: number) {
+export function PHOTO_GET(photoId: number | string) {
   return {
     url: API_URL + `/api/photo/${photoId}`,
     options: {

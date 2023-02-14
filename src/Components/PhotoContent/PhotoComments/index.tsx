@@ -6,7 +6,7 @@ import { CommentsForm, CommentsList } from './styles';
 import useFetch from '../../../hooks/useFetch';
 import { COMMENT_POST } from '../../../api';
 
-const PhotoComments: React.FC<{ id: number, comments: any }> = ({ id, comments }) => {
+const PhotoComments: React.FC<{ id: number, comments: any, single: boolean }> = ({ id, comments, single }) => {
   // comment inside the textarea
   const [comment, setComment] = useState('');
   // comment list from fetch
@@ -44,7 +44,7 @@ const PhotoComments: React.FC<{ id: number, comments: any }> = ({ id, comments }
 
   return (
     <>
-      <CommentsList ref={commentsSection}>
+      <CommentsList ref={commentsSection} single={single}>
         {commentsList.map((item: any) => (
           <li key={item.comment_ID}>
             <b>{item.comment_author}: </b>
@@ -54,7 +54,7 @@ const PhotoComments: React.FC<{ id: number, comments: any }> = ({ id, comments }
         )}
       </CommentsList>
       {isUserLoggedIn && (
-        <CommentsForm onSubmit={onSubmit}>
+        <CommentsForm onSubmit={onSubmit} single={single}>
           <textarea
             id='comment'
             name='comment'

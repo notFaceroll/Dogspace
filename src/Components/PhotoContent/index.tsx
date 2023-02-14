@@ -10,7 +10,7 @@ import PhotoComments from './PhotoComments';
 
 import { Container, PhotoDeleteButton } from './styles';
 
-const PhotoContent: React.FC<any> = ({ data }) => {
+const PhotoContent: React.FC<any> = ({ data, single = false }) => {
   const { isLoading, makeRequest } = useFetch();
   const user = useContext(UserContext);
   const { comments } = data;
@@ -34,7 +34,7 @@ const PhotoContent: React.FC<any> = ({ data }) => {
 
 
   return (
-    <Container>
+    <Container single={single}>
       <div className='img'>
         <Image src={photo.src} alt={photo.title}/>
         {/* <img src={photo.src} alt={photo.title} /> */}
@@ -63,7 +63,7 @@ const PhotoContent: React.FC<any> = ({ data }) => {
           </ul>
         </div>
       </div>
-      <PhotoComments id={photo.id} comments={comments} />
+      <PhotoComments id={photo.id} comments={comments} single={single} />
     </Container>
   );
 }
