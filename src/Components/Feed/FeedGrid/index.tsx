@@ -19,20 +19,24 @@ export interface IPhoto {
 }
 
 
-const FeedGrid: React.FC<{ setModalPhoto: React.Dispatch<React.SetStateAction<IPhoto | null>> }> = ({ setModalPhoto }) => {
+const FeedGrid: React.FC<{ page?: number, user:number , setModalPhoto: React.Dispatch<React.SetStateAction<IPhoto | null>>, setInfinite: React.Dispatch<React.SetStateAction<boolean>>}> = ({ page = 1, user, setModalPhoto, setInfinite }) => {
+
   const { data, error, isLoading, makeRequest } = useFetch();
 
   useEffect(() => {
     (async function fetchPhotos() {
-      const { url, options } = PHOTOS_GET({ page: 1, total: 6, user: 0 });
+      const { url, options } = PHOTOS_GET({ page, total: 3, user });
       const { response, json } = await makeRequest(url, options);
-      console.log(json);
+
+      if (response && response.ok && json.length < 3) {
+        setInfinite(false);
+      }
     })();
-  }, [])
+  }, [user, makeRequest, page, setInfinite]);
 
   function handleOpenPhotoModal(photo: IPhoto) {
-    setModalPhoto(photo)
-  }
+    setModalPhoto(photo);
+  };
 
   if (error) {
     return <p>{error}</p>
@@ -40,7 +44,8 @@ const FeedGrid: React.FC<{ setModalPhoto: React.Dispatch<React.SetStateAction<IP
 
   if (isLoading) {
     return <Loading />;
-  }
+  };
+
   return (
     <PhotoList className='slideRight'>
       {data?.map((photo: IPhoto) => (
