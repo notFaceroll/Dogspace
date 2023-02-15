@@ -8,6 +8,7 @@ import LoginPasswordReset from './LoginPasswordReset';
 import { UserContext } from '../../context/UserContext';
 
 import { Container } from './styles';
+import NotFound from '../NotFound';
 
 const Login: React.FC = () => {
   const { isUserLoggedIn } = useContext(UserContext);
@@ -26,6 +27,7 @@ const Login: React.FC = () => {
           <Route path='create' element={<LoginCreate />} />
           <Route path='lost' element={<LoginPasswordLost />} />
           <Route path='reset' element={<LoginPasswordReset />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Container>

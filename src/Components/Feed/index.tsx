@@ -4,7 +4,7 @@ import FeedModal from './FeedModal';
 
 // import { Container } from './styles';
 
-const Feed: React.FC<{ user?: number }> = ({ user = 0 }) => {
+const Feed: React.FC<{ user?: number | string}> = ({ user = 0 }) => {
   const [modalPhoto, setModalPhoto] = useState<IPhoto | null>(null);
   const [pages, setPages] = useState([1]);
   const [infinite, setInfinite] = useState(true);

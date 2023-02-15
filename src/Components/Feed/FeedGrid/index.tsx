@@ -19,7 +19,7 @@ export interface IPhoto {
 }
 
 
-const FeedGrid: React.FC<{ page?: number, user:number , setModalPhoto: React.Dispatch<React.SetStateAction<IPhoto | null>>, setInfinite: React.Dispatch<React.SetStateAction<boolean>>}> = ({ page = 1, user, setModalPhoto, setInfinite }) => {
+const FeedGrid: React.FC<{ page?: number, user:number | string , setModalPhoto: React.Dispatch<React.SetStateAction<IPhoto | null>>, setInfinite: React.Dispatch<React.SetStateAction<boolean>>}> = ({ page = 1, user, setModalPhoto, setInfinite }) => {
 
   const { data, error, isLoading, makeRequest } = useFetch();
 

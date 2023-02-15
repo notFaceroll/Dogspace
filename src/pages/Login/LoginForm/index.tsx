@@ -49,7 +49,7 @@ const LoginForm: React.FC = () => {
         <Button disabled={isLoading} type='submit'>Entrar</Button>
         {error && <p>{error}</p>}
       </form>
-      <RecoverPasswordLink to="/login/reset">Perdeu a senha?</RecoverPasswordLink>
+      <RecoverPasswordLink to="/login/lost">Perdeu a senha?</RecoverPasswordLink>
       <SignUpContainer>
         <h2>Cadastre-se!</h2>
         <p>Ainda não possui uma conta? Cadastre-se no site.</p>

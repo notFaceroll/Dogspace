@@ -4,11 +4,11 @@ import { StyledButton } from './styles';
 
 interface ButtonProps {
   children: ReactNode;
-  type: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset" | undefined;
   disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, type, disabled = false }) => {
+const Button: React.FC<ButtonProps> = ({ children, type = "submit", disabled = false }) => {
   return (
     <StyledButton disabled={disabled} type={type}>{children}</StyledButton>
   );

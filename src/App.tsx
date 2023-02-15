@@ -12,6 +12,8 @@ import UserProvider from "./context/UserContext"
 import ProtectedRoute from "./Components/utils/ProtectedRoute"
 import Account from "./pages/Account"
 import Photo from "./pages/Photo"
+import UserProfile from "./pages/Account/UserProfile"
+import NotFound from "./pages/NotFound"
 
 function App() {
 
@@ -26,6 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="login/*" element={<Login />} />
             <Route path="photo/:id" element={<Photo />} />
+            <Route path="profile/:user" element={<UserProfile />} />
             <Route path="account/*"
               element={
                 <ProtectedRoute>
@@ -33,6 +36,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
 
