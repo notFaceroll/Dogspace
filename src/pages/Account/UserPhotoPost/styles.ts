@@ -20,5 +20,9 @@ export const Container = styled.section`
       padding-bottom: 100%;
     }
   }
+
+  @media screen and (max-width: 40rem) {
+    grid-template-columns: 1fr;
+  }
 `;
 

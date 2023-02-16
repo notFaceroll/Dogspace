@@ -40,7 +40,7 @@ const LoginPasswordReset: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container className='slideRight'>
       <Title>Reset sua senha</Title>
       <form onSubmit={handleSubmit}>
         <FormGroup label='Nova Senha' error={password.error}>

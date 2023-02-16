@@ -15,6 +15,7 @@ export const Container = styled.section`
 
   form {
     margin-bottom: 2rem;
+
   }
 
   h1 {
@@ -69,7 +70,7 @@ export const FormTitle = styled.h1`
 
 export const SignUpContainer = styled.div`
   margin-top: 4rem;
-
+  margin-bottom: 2rem;
   h2 {
     font-family: ${({ theme }) => theme.fonts.secondary};
     line-height: 1;

@@ -29,7 +29,7 @@ const LoginPasswordLost: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container className='slideRight'>
       <Title>Perdeu a senha?</Title>
       {data ? (
         <p style={{ color: '#4c1' }}>{data}</p>

@@ -15,34 +15,38 @@ import Photo from "./pages/Photo"
 import UserProfile from "./pages/Account/UserProfile"
 import NotFound from "./pages/NotFound"
 
+import { Container, AppBody } from './styles/app';
+
 function App() {
 
   return (
-    <BrowserRouter>
-      <UserProvider>
-        <ThemeProvider theme={myTheme}>
-          <GlobalStyle />
-
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="login/*" element={<Login />} />
-            <Route path="photo/:id" element={<Photo />} />
-            <Route path="profile/:user" element={<UserProfile />} />
-            <Route path="account/*"
-              element={
-                <ProtectedRoute>
-                  <Account />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-
-        </ThemeProvider>
-      </UserProvider>
-    </BrowserRouter>
+    <Container>
+      <BrowserRouter>
+        <UserProvider>
+          <ThemeProvider theme={myTheme}>
+            <GlobalStyle />
+            <Header />
+            <AppBody>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="login/*" element={<Login />} />
+                <Route path="photo/:id" element={<Photo />} />
+                <Route path="profile/:user" element={<UserProfile />} />
+                <Route path="account/*"
+                  element={
+                    <ProtectedRoute>
+                      <Account />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AppBody>
+            <Footer />
+          </ThemeProvider>
+        </UserProvider>
+      </BrowserRouter>
+    </Container>
   )
 }
 
