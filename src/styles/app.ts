@@ -8,4 +8,5 @@ export const Container = styled.div`
 
 export const AppBody = styled.div`
   flex: 1;
+  padding-inline: 1rem;
 `

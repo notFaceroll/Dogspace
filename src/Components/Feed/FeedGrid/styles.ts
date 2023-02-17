@@ -10,7 +10,7 @@ export const PhotoList = styled.ul`
   justify-items: center;
 
   @media screen and (max-width: 40rem) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 `;
 

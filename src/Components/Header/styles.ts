@@ -8,6 +8,7 @@ export const Container = styled.header`
   z-index: 10;
   top: 0;
   background-color: #fff;
+  padding-inline: 1rem;
 
   nav {
     display: flex;
